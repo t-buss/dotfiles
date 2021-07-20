@@ -15,3 +15,9 @@ disabled = false
 
 [aws]
 disabled=true
+
+[time]
+disabled = false
+
+[gcloud]
+disabled = true
