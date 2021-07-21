@@ -13,7 +13,7 @@ if [[ "$CONTENT" =~ ^(todo|TODO) ]]; then
 	CONTENT=$(echo $CONTENT | sed 's/^todo //gi')
 	LINE=$(printf -- '- [ ] %b\n' "$CONTENT")
 	sed -ibak --follow-symlinks "/^## To do/a $LINE" $HOME/Repos/obsidian/Knowledge/Projects/current.md
-	rm $HOME/Repos/obsidian/Knowledge/Projects/current.mdbak
+	rm $HOME/Repos/obsidian/Knowledge/Projects/*.mdbak
 	exit 0
 fi
 
