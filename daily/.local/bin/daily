@@ -17,5 +17,5 @@ if [[ "$CONTENT" =~ ^(todo|TODO) ]]; then
 	exit 0
 fi
 
-printf "%b %b\n" "$TIMESTAMP" "$CONTENT" >> $HOME/Repos/obsidian/Knowledge/DailyNotes/`date +%F`.md
+printf -- "- %b %b\n" "$TIMESTAMP" "$CONTENT" >> $HOME/Repos/obsidian/Knowledge/DailyNotes/`date +%F`.md
 
