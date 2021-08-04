@@ -3,7 +3,7 @@ set -e
 set -o pipefail
 
 TIMESTAMP=`date +%H:%M`
-CONTENT=`rofi -dmenu -l 0`
+CONTENT=`rofi -dmenu -l 0 -p ">>>"`
 
 if [[ -z "$CONTENT" ]]; then
 	exit 1
@@ -12,10 +12,24 @@ fi
 if [[ "$CONTENT" =~ ^(todo|TODO) ]]; then
 	CONTENT=$(echo $CONTENT | sed 's/^todo //gi')
 	LINE=$(printf -- '- [ ] %b\n' "$CONTENT")
-	sed -ibak --follow-symlinks "/^## To do/a $LINE" $HOME/Repos/obsidian/Knowledge/Projects/current.md
-	rm $HOME/Repos/obsidian/Knowledge/Projects/*.mdbak
+	sed -ibak --follow-symlinks "/^## To do/a $LINE" $HOME/Repos/obsidian/Reboot/Projects/current.md
+	rm $HOME/Repos/obsidian/Reboot/Projects/*.mdbak
 	exit 0
 fi
 
-printf -- "- %b %b\n" "$TIMESTAMP" "$CONTENT" >> $HOME/Repos/obsidian/Knowledge/DailyNotes/`date +%F`.md
+if [[ "$CONTENT" =~ ^(z ) ]]; then
+	CONTENT=$(echo $CONTENT | sed 's/^z //gi')
+	cp $HOME/Repos/obsidian/Reboot/Templates/ZettelkastenTemplate.md $HOME/Repos/obsidian/Reboot/Zettelkasten/"$CONTENT".md
+	sed -ibak "s/^# $/# $CONTENT/g" $HOME/Repos/obsidian/Reboot/Zettelkasten/"$CONTENT".md
+	rm $HOME/Repos/obsidian/Reboot/Zettelkasten/*.mdbak
+	exit 0
+fi
+
+DAILY_NOTE_FILENAME=`date +"%Y_%m_%d"`.md
+
+if [[ ! -f $HOME/Repos/obsidian/Reboot/DailyNotes/$DAILY_NOTE_FILENAME ]]; then
+	cp $HOME/Repos/obsidian/Reboot/Templates/DailyNote.md $HOME/Repos/obsidian/Reboot/DailyNotes/$DAILY_NOTE_FILENAME
+fi
+
+printf -- "- %b %b\n" "$TIMESTAMP" "$CONTENT" >> $HOME/Repos/obsidian/Reboot/DailyNotes/$DAILY_NOTE_FILENAME
 
