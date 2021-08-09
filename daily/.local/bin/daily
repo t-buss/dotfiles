@@ -12,7 +12,31 @@ fi
 if [[ "$CONTENT" =~ ^(todo|TODO) ]]; then
 	CONTENT=$(echo $CONTENT | sed 's/^todo //gi')
 	LINE=$(printf -- '- [ ] %b\n' "$CONTENT")
-	sed -ibak --follow-symlinks "/^## To do/a $LINE" $HOME/Repos/obsidian/Reboot/Projects/current.md
+	sed -ibak --follow-symlinks "/^## Todo/a $LINE" $HOME/Repos/obsidian/Reboot/Projects/current.md
+	rm $HOME/Repos/obsidian/Reboot/Projects/*.mdbak
+	exit 0
+fi
+
+if [[ "$CONTENT" =~ ^(doing ) ]]; then
+	CONTENT=$(echo $CONTENT | sed 's/^doing //gi')
+	LINE=$(printf -- '- [ ] %b\n' "$CONTENT")
+	sed -ibak --follow-symlinks "/^## Doing/a $LINE" $HOME/Repos/obsidian/Reboot/Projects/current.md
+	rm $HOME/Repos/obsidian/Reboot/Projects/*.mdbak
+	exit 0
+fi
+
+if [[ "$CONTENT" =~ ^(waiting ) ]]; then
+	CONTENT=$(echo $CONTENT | sed 's/^waiting //gi')
+	LINE=$(printf -- '- [ ] %b\n' "$CONTENT")
+	sed -ibak --follow-symlinks "/^## Waiting/a $LINE" $HOME/Repos/obsidian/Reboot/Projects/current.md
+	rm $HOME/Repos/obsidian/Reboot/Projects/*.mdbak
+	exit 0
+fi
+
+if [[ "$CONTENT" =~ ^(done ) ]]; then
+	CONTENT=$(echo $CONTENT | sed 's/^done //gi')
+	LINE=$(printf -- '- [ ] %b\n' "$CONTENT")
+	sed -ibak --follow-symlinks "/^## Done/a $LINE" $HOME/Repos/obsidian/Reboot/Projects/current.md
 	rm $HOME/Repos/obsidian/Reboot/Projects/*.mdbak
 	exit 0
 fi
