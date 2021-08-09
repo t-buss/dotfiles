@@ -2,6 +2,19 @@
 set -e
 set -o pipefail
 
+function log() {
+	local CONTENT
+	CONTENT=$1
+	DAILY_NOTE_FILENAME=`date +"%Y_%m_%d"`.md
+
+	if [[ ! -f $HOME/Repos/obsidian/Reboot/DailyNotes/$DAILY_NOTE_FILENAME ]]; then
+		cp $HOME/Repos/obsidian/Reboot/Templates/DailyNote.md \
+			$HOME/Repos/obsidian/Reboot/DailyNotes/$DAILY_NOTE_FILENAME
+	fi
+
+	printf -- "- %b %b\n" "$TIMESTAMP" "$CONTENT" >> $HOME/Repos/obsidian/Reboot/DailyNotes/$DAILY_NOTE_FILENAME
+}
+
 TIMESTAMP=`date +%H:%M`
 CONTENT=`rofi -dmenu -l 0 -p ">>>"`
 
@@ -14,6 +27,7 @@ if [[ "$CONTENT" =~ ^(todo|TODO) ]]; then
 	LINE=$(printf -- '- [ ] %b\n' "$CONTENT")
 	sed -ibak --follow-symlinks "/^## Todo/a $LINE" $HOME/Repos/obsidian/Reboot/Projects/current.md
 	rm $HOME/Repos/obsidian/Reboot/Projects/*.mdbak
+	log "Created Todo: $CONTENT"
 	exit 0
 fi
 
@@ -22,6 +36,7 @@ if [[ "$CONTENT" =~ ^(doing ) ]]; then
 	LINE=$(printf -- '- [ ] %b\n' "$CONTENT")
 	sed -ibak --follow-symlinks "/^## Doing/a $LINE" $HOME/Repos/obsidian/Reboot/Projects/current.md
 	rm $HOME/Repos/obsidian/Reboot/Projects/*.mdbak
+	log "Created Doing: $CONTENT"
 	exit 0
 fi
 
@@ -30,6 +45,7 @@ if [[ "$CONTENT" =~ ^(waiting ) ]]; then
 	LINE=$(printf -- '- [ ] %b\n' "$CONTENT")
 	sed -ibak --follow-symlinks "/^## Waiting/a $LINE" $HOME/Repos/obsidian/Reboot/Projects/current.md
 	rm $HOME/Repos/obsidian/Reboot/Projects/*.mdbak
+	log "Created Waiting: $CONTENT"
 	exit 0
 fi
 
@@ -38,6 +54,7 @@ if [[ "$CONTENT" =~ ^(done ) ]]; then
 	LINE=$(printf -- '- [ ] %b\n' "$CONTENT")
 	sed -ibak --follow-symlinks "/^## Done/a $LINE" $HOME/Repos/obsidian/Reboot/Projects/current.md
 	rm $HOME/Repos/obsidian/Reboot/Projects/*.mdbak
+	log "Created Done: $CONTENT"
 	exit 0
 fi
 
@@ -46,14 +63,9 @@ if [[ "$CONTENT" =~ ^(z ) ]]; then
 	cp $HOME/Repos/obsidian/Reboot/Templates/ZettelkastenTemplate.md $HOME/Repos/obsidian/Reboot/Zettelkasten/"$CONTENT".md
 	sed -ibak "s/^# $/# $CONTENT/g" $HOME/Repos/obsidian/Reboot/Zettelkasten/"$CONTENT".md
 	rm $HOME/Repos/obsidian/Reboot/Zettelkasten/*.mdbak
+	log "Created ZK note: $CONTENT"
 	exit 0
 fi
 
-DAILY_NOTE_FILENAME=`date +"%Y_%m_%d"`.md
-
-if [[ ! -f $HOME/Repos/obsidian/Reboot/DailyNotes/$DAILY_NOTE_FILENAME ]]; then
-	cp $HOME/Repos/obsidian/Reboot/Templates/DailyNote.md $HOME/Repos/obsidian/Reboot/DailyNotes/$DAILY_NOTE_FILENAME
-fi
-
-printf -- "- %b %b\n" "$TIMESTAMP" "$CONTENT" >> $HOME/Repos/obsidian/Reboot/DailyNotes/$DAILY_NOTE_FILENAME
+log "$CONTENT"
 
