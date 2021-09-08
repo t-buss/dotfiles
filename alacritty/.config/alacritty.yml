@@ -32,6 +32,7 @@ window:
     x: 1
     y: 1
   decorations: full
+  opacity: 1
 font:
   size: 12.0
   normal:
@@ -45,7 +46,6 @@ font:
   bold_italic:
     family: JetBrainsMono Nerd Font
     style: Bold Italic
-background_opacity: 1
 cursor:
   style: Beam
   vi_mode_style: Block
