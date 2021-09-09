@@ -21,7 +21,7 @@ function log() {
 }
 
 TIMESTAMP=`date +%H:%M`
-CONTENT=`rofi -dmenu -l 0 -p ">>>"`
+CONTENT=`echo -e "Good Morning\nLunch Break\nFeierabend" | rofi -dmenu -p ">>>"`
 
 if [[ -z "$CONTENT" ]]; then
 	exit 1
