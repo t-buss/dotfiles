@@ -13,6 +13,11 @@ function log() {
 	fi
 
 	printf -- "- %b %b\n" "$TIMESTAMP" "$CONTENT" >> $HOME/Repos/obsidian/Reboot/DailyNotes/$DAILY_NOTE_FILENAME
+
+	if [[ "${CONTENT,,}" =~ ^(lunch break) ]]; then
+		printf -- "---" >> $HOME/Repos/obsidian/Reboot/DailyNotes/$DAILY_NOTE_FILENAME
+	fi
+
 }
 
 TIMESTAMP=`date +%H:%M`
