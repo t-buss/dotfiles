@@ -30,15 +30,15 @@ autocmd BufWritePre * %s/\s\+$//e
 call plug#begin(stdpath('data') . '/plugged')
 
 " Eye-candy
-Plug 'vim-airline/vim-airline'
-Plug 'ryanoasis/vim-devicons'
-Plug 'arcticicestudio/nord-vim'
 Plug 'APZelos/blamer.nvim'
+Plug 'arcticicestudio/nord-vim'
+Plug 'ryanoasis/vim-devicons'
+Plug 'vim-airline/vim-airline'
 
 " Git
-Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'jreybert/vimagit'
+Plug 'tpope/vim-fugitive'
 
 " Completions
 Plug 'jiangmiao/auto-pairs'
@@ -46,14 +46,14 @@ Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-surround'
 
 " Usablility
+Plug 'bronson/vim-trailing-whitespace'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'bronson/vim-trailing-whitespace'
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'preservim/nerdtree'
 Plug 'simnalamburt/vim-mundo' " To install support, run: pip3 install --user pynvim
-Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-repeat'
 Plug 'unblevable/quick-scope'
 Plug 'vim-scripts/ReplaceWithRegister'
 Plug 'vim-scripts/argtextobj.vim'
