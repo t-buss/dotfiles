@@ -15,13 +15,13 @@ function log() {
 	printf -- "- %b %b\n" "$TIMESTAMP" "$CONTENT" >> $HOME/Repos/obsidian/Reboot/DailyNotes/$DAILY_NOTE_FILENAME
 
 	if [[ "${CONTENT,,}" =~ ^(lunch break) ]]; then
-		printf -- "---" >> $HOME/Repos/obsidian/Reboot/DailyNotes/$DAILY_NOTE_FILENAME
+		printf -- "---\n" >> $HOME/Repos/obsidian/Reboot/DailyNotes/$DAILY_NOTE_FILENAME
 	fi
 
 }
 
 TIMESTAMP=`date +%H:%M`
-CONTENT=`echo -e "Good Morning\nLunch Break\nFeierabend" | rofi -dmenu -p ">>>"`
+CONTENT=`echo -e "Good Morning\nDaily\nLunch Break\nBack from lunch\nFeierabend" | rofi -dmenu -l 5 -p ">>>"`
 
 if [[ -z "$CONTENT" ]]; then
 	exit 1
