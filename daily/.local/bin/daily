@@ -68,7 +68,7 @@ if [[ "$CONTENT" =~ ^(z ) ]]; then
 	cp $HOME/Repos/obsidian/Reboot/Templates/ZettelkastenTemplate.md $HOME/Repos/obsidian/Reboot/Zettelkasten/"$CONTENT".md
 	sed -ibak "s/^# $/# $CONTENT/g" $HOME/Repos/obsidian/Reboot/Zettelkasten/"$CONTENT".md
 	rm $HOME/Repos/obsidian/Reboot/Zettelkasten/*.mdbak
-	log "Created ZK note: $CONTENT"
+	log "Created ZK note: [[$CONTENT]]"
 	exit 0
 fi
 
