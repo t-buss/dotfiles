@@ -79,8 +79,8 @@ noremap <leader>grh :action Vcs.RollbackChangedLines<CR>
 noremap <leader>gp :action Vcs.UpdateProject<CR>
 noremap <leader>gP :action Vcs.Push<CR>
 noremap <leader>gd :action Compare.SameVersion<CR>
-noremap <leader>gb :action Annotate<CR>
-noremap <leader>gB :action Git.Branches<CR>
+noremap <leader>gB :action Annotate<CR>
+noremap <leader>gb :action Git.Branches<CR>
 noremap <leader>gl :action Vcs.ShowTabbedFileHistory<CR>
 noremap [c :action VcsShowPrevChangeMarker<CR>
 noremap ]c :action VcsShowNextChangeMarker<CR>
