@@ -21,7 +21,7 @@ function log() {
 }
 
 TIMESTAMP=`date +%H:%M`
-CONTENT=`echo -e "Good Morning\nDaily\nLunch Break\nBack from lunch\nFeierabend" | rofi -dmenu -l 5 -p ">>>"`
+CONTENT=`echo -e "Good Morning\nDaily\nLunch Break\nBack from lunch\nFeierabend\nStunden eingetragen" | rofi -dmenu -l 6 -p ">>>" -font "JetBrains Mono NF 13"`
 
 if [[ -z "$CONTENT" ]]; then
 	exit 1
@@ -63,11 +63,24 @@ if [[ "$CONTENT" =~ ^(done ) ]]; then
 	exit 0
 fi
 
+URL_REGEX='https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)'
+
 if [[ "$CONTENT" =~ ^(z ) ]]; then
 	CONTENT=$(echo $CONTENT | sed 's/^z //gi')
+	LAST_WORD=$(echo $CONTENT | awk 'NF{ print $NF }')
+	if [[ "$LAST_WORD" =~ $URL_REGEX ]]; then
+		CONTENT=$(echo $CONTENT | awk '{ $NF="" } { print }' | sed 's/ $//')
+	fi
 	cp $HOME/Repos/obsidian/Reboot/Templates/ZettelkastenTemplate.md $HOME/Repos/obsidian/Reboot/Zettelkasten/"$CONTENT".md
 	sed -ibak "s/^# $/# $CONTENT/g" $HOME/Repos/obsidian/Reboot/Zettelkasten/"$CONTENT".md
 	rm $HOME/Repos/obsidian/Reboot/Zettelkasten/*.mdbak
+	if [[ "$LAST_WORD" =~ $URL_REGEX ]]; then
+		echo "Regex works"
+		echo $CONTENT
+		echo $LAST_WORD
+		sed -ibak "s|^source: $|source: $LAST_WORD|g" $HOME/Repos/obsidian/Reboot/Zettelkasten/"$CONTENT".md
+		rm $HOME/Repos/obsidian/Reboot/Zettelkasten/*.mdbak
+	fi
 	log "Created ZK note: [[$CONTENT]]"
 	exit 0
 fi
