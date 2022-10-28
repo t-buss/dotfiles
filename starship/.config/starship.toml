@@ -14,10 +14,10 @@ style = "bold white"
 disabled = false
 
 [aws]
-disabled=true
-
-[time]
-disabled = false
+disabled=false
 
 [gcloud]
 disabled = true
+
+[time]
+disabled = false
