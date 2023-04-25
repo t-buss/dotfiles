@@ -20,8 +20,8 @@ plugins=(
 
 source $ZSH/custom/plugins/zsh-system-clipboard/zsh-system-clipboard.zsh
 export ZSH_SYSTEM_CLIPBOARD_TMUX_SUPPORT='true'
-source /home/linuxbrew/.linuxbrew/Cellar/fzf/0.34.0/shell/key-bindings.zsh
-source /home/linuxbrew/.linuxbrew/Cellar/fzf/0.34.0/shell/completion.zsh
+source /home/linuxbrew/.linuxbrew/Cellar/fzf/0.39.0/shell/key-bindings.zsh
+source /home/linuxbrew/.linuxbrew/Cellar/fzf/0.39.0/shell/completion.zsh
 # source /home/linuxbrew/.linuxbrew/share/zsh/site-functions/*
 
 # vi mode
@@ -76,8 +76,9 @@ alias l="exa -la --git"
 alias wttr="curl wttr.in/Dortmund"
 alias sudo="sudo "
 alias tmux='TERM=screen-256color tmux'
-alias Syu="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt autoclean && brew update && brew upgrade --greedy && brew cleanup"
+alias Syu="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt autoclean && brew update && brew upgrade && brew cleanup"
 alias brewdeps='brew deps --installed --tree -1 $(brew leaves) | less'
+alias open="xdg-open"
 
 autoload -U compinit && compinit
 

@@ -27,6 +27,21 @@ if [[ -z "$CONTENT" ]]; then
 	exit 1
 fi
 
+if [[ "$CONTENT" =~ ^(task) ]]; then
+	CONTENT=$(echo $CONTENT | sed 's/^task //gi')
+	LINE=$(printf -- '- [ ] %b\n' "$CONTENT")
+	echo "$LINE" >> $HOME/Repos/obsidian/Reboot/Tasks.md
+	log "Created Task: $CONTENT"
+	exit 0
+fi
+
+if [[ "$CONTENT" =~ ^(inbox) ]]; then
+	CONTENT=$(echo $CONTENT | sed 's/^inbox //gi')
+	LINE=$(printf -- '- [ ] %b\n' "$CONTENT")
+	echo "$LINE" >> $HOME/Repos/obsidian/Reboot/Inbox.md
+	exit 0
+fi
+
 if [[ "$CONTENT" =~ ^(todo|TODO) ]]; then
 	CONTENT=$(echo $CONTENT | sed 's/^todo //gi')
 	LINE=$(printf -- '- [ ] %b\n' "$CONTENT")
