@@ -64,6 +64,7 @@ vnoremap <C-[> :action EditorSelectWord<CR>
 vnoremap <C-]> :action EditorUnSelectWord<CR>
 
 noremap <leader>r :action Refactorings.QuickListPopupAction<CR>
+noremap <leader>l :action MoveTabRight<CR>
 
 noremap <leader>xm :action ExtractMethod<CR>
 noremap <leader>xv :action IntroduceVariable<CR>

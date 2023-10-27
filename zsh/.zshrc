@@ -20,8 +20,8 @@ plugins=(
 
 source $ZSH/custom/plugins/zsh-system-clipboard/zsh-system-clipboard.zsh
 export ZSH_SYSTEM_CLIPBOARD_TMUX_SUPPORT='true'
-source /home/linuxbrew/.linuxbrew/Cellar/fzf/0.39.0/shell/key-bindings.zsh
-source /home/linuxbrew/.linuxbrew/Cellar/fzf/0.39.0/shell/completion.zsh
+source /home/linuxbrew/.linuxbrew/Cellar/fzf/0.43.0/shell/key-bindings.zsh
+source /home/linuxbrew/.linuxbrew/Cellar/fzf/0.43.0/shell/completion.zsh
 # source /home/linuxbrew/.linuxbrew/share/zsh/site-functions/*
 
 # vi mode
@@ -53,8 +53,6 @@ export PATH=$PATH:$HOME/.local/share/JetBrains/Toolbox/scripts
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
-export AWS_REGION=eu-central-1
-export AWS_DEFAULT_REGION=eu-central-1
 export AWS_PROFILE=default
 
 source $ZSH/oh-my-zsh.sh
@@ -76,7 +74,7 @@ alias l="exa -la --git"
 alias wttr="curl wttr.in/Dortmund"
 alias sudo="sudo "
 alias tmux='TERM=screen-256color tmux'
-alias Syu="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt autoclean && brew update && brew upgrade && brew cleanup"
+alias Syu="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt autoclean && brew update && brew upgrade && brew cleanup && sudo snap refresh && flatpak update -y"
 alias brewdeps='brew deps --installed --tree -1 $(brew leaves) | less'
 alias open="xdg-open"
 
