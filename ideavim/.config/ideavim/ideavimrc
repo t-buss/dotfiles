@@ -1,6 +1,6 @@
 " Common settings
 set showmode
-set scrolloff=10
+" set scrolloff=10
 set incsearch
 set relativenumber number
 set ignorecase

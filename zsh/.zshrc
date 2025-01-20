@@ -16,12 +16,14 @@ plugins=(
     zsh-vi-mode
     dotenv
     aws
+    fzf
 )
 
+export FZF_VERSION=$(fzf --version | sed 's/ .*$//')
 source $ZSH/custom/plugins/zsh-system-clipboard/zsh-system-clipboard.zsh
 export ZSH_SYSTEM_CLIPBOARD_TMUX_SUPPORT='true'
-source /home/linuxbrew/.linuxbrew/Cellar/fzf/0.43.0/shell/key-bindings.zsh
-source /home/linuxbrew/.linuxbrew/Cellar/fzf/0.43.0/shell/completion.zsh
+source /home/linuxbrew/.linuxbrew/Cellar/fzf/$FZF_VERSION/shell/key-bindings.zsh
+source /home/linuxbrew/.linuxbrew/Cellar/fzf/$FZF_VERSION/shell/completion.zsh
 # source /home/linuxbrew/.linuxbrew/share/zsh/site-functions/*
 
 # vi mode
@@ -55,6 +57,7 @@ export SDKMAN_DIR="$HOME/.sdkman"
 
 export AWS_PROFILE=default
 
+eval "$(fzf --zsh)"
 source $ZSH/oh-my-zsh.sh
 unset -f jc # Unset autojumps jc function to not interfere with the jc command line tool
 
@@ -70,7 +73,8 @@ alias gs="git status"
 alias glo="git log --graph --oneline --all"
 alias glr="git pull --rebase"
 alias glrp="git pull --rebase --prune"
-alias l="exa -la --git"
+alias gcof='git checkout $(git branch | fzf)'
+alias l="ls -lAh"
 alias wttr="curl wttr.in/Dortmund"
 alias sudo="sudo "
 alias tmux='TERM=screen-256color tmux'
@@ -79,6 +83,5 @@ alias brewdeps='brew deps --installed --tree -1 $(brew leaves) | less'
 alias open="xdg-open"
 
 autoload -U compinit && compinit
-
 eval "$(starship init zsh)"
 
